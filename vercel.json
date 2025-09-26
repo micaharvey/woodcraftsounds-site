@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "www.woodcraftsounds.com",
+      "destination": "https://woodcraftsounds.com",
+      "permanent": true
+    }
+  ]
+}
