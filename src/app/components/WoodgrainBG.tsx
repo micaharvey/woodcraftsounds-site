@@ -202,7 +202,7 @@ export default function WoodgrainBG() {
 
     const rows = 30; // number of long grain lines
     const samples = 180; // points per line
-    const margin = 40;
+    const margin = 0;
 
     const lines: string[] = [];
 
