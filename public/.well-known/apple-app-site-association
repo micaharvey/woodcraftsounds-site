@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "G7CNT7WY59.com.WoodCraftSounds.MicahSynth"
+        ],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "Allow MicahSynth to open all site paths"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "G7CNT7WY59.com.WoodCraftSounds.MicahSynth"
+    ]
+  },
+  "appclips": {
+    "apps": []
+  }
+}

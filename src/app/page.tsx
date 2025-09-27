@@ -1,3 +1,5 @@
+import WoodgrainBG from "./components/WoodgrainBG";
+
 export default function Home() {
   const wrap: React.CSSProperties = {
     minHeight: "100dvh",
@@ -9,22 +11,24 @@ export default function Home() {
   const card: React.CSSProperties = {
     padding: "2.5rem 2rem",
     borderRadius: 16,
-    boxShadow: "0 10px 30px rgba(0,0,0,.12)",
-    background: "rgba(255,255,255,.8)",
+    boxShadow: "0 10px 30px rgba(132, 199, 255, 0.33)",
     backdropFilter: "blur(8px)",
     textAlign: "center",
     maxWidth: 680,
   };
   const h1: React.CSSProperties = {
     margin: 0,
+    color: "#ddd",
     fontSize: "2rem",
     letterSpacing: ".02em",
   };
-  const p: React.CSSProperties = { marginTop: ".75rem", color: "#444" };
+  const p: React.CSSProperties = { marginTop: ".75rem", color: "#ccc" };
   const a: React.CSSProperties = { color: "#2563eb", textDecoration: "none" };
 
   return (
     <main style={wrap}>
+      {/* Background */}
+      <WoodgrainBG />
       <section style={card}>
         <h1 style={h1}>Woodcraft Sounds</h1>
         <p style={p}>Projects and releases by Micah Arvey.</p>

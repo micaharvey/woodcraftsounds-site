@@ -1,13 +1,6 @@
 :root {
-  --background: #ffffff;
+  --background: #2a1c15;
   --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 html,
@@ -16,13 +9,20 @@ body {
   overflow-x: hidden;
 }
 
+/* ===== WALNUT BASE BACKGROUND ===== */
 body {
+  background-color: #2a1c15; /* deep walnut brown */
+  color: var(--foreground); /* keeps your existing text color */
+  position: relative; /* so pseudo-elements can layer later */
+}
+
+/* body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -34,9 +34,147 @@ a {
   color: inherit;
   text-decoration: none;
 }
+/* ===== WALNUT BACKGROUND WITH GRAIN ===== */
+:root {
+  --walnut-base: #2a1c15; /* deep walnut brown */
+  --walnut-dark: #1a120e; /* darker lowlights */
+}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+body {
+  background-color: var(--walnut-base);
+  color: var(--foreground);
+  position: relative; /* allows pseudo-elements to layer */
+}
+
+/* Woodgrain overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  /* Procedural wood grain */
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'>\
+  <filter id='grain'>\
+    <feTurbulence type='fractalNoise' baseFrequency='0.004 0.02' numOctaves='4' seed='11'/>\
+    <feColorMatrix type='matrix' values='\
+      0 0 0 0 0 \
+      0 0 0 0 0 \
+      0 0 0 0 0 \
+      0 0 0 -1.2 1'/>\
+  </filter>\
+  <rect width='1200' height='800' filter='url(%23grain)' opacity='0.15' fill='black'/>\
+</svg>");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: multiply;
+}
+/* ===== STRONG WALNUT STRIATIONS + VISIBLE KNOTS ===== */
+:root {
+  /* Main grain (angled) */
+  --grain-angle: 7deg;
+  --grain-opacity: 0.75; /* stronger */
+  --g1-width: 4px;
+  --g1-gap: 14px;
+  --g2-width: 6px;
+  --g2-gap: 28px;
+
+  /* Vertical grain */
+  --v1-width: 3px;
+  --v1-gap: 20px;
+  --v2-width: 5px;
+  --v2-gap: 40px;
+
+  /* Knots */
+  --knot-opacity: 0.35; /* higher so you SEE them */
+  --knot-scale: 320px; /* tighter tiling for more knots */
+  --knot-ring: 16%; /* ring radius */
+  --knot-band: 2px; /* ring thickness */
+}
+
+/* Bold striations */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    /* angled thin */ repeating-linear-gradient(
+      var(--grain-angle),
+      rgba(0, 0, 0, 0.35) 0,
+      rgba(0, 0, 0, 0.35) var(--g1-width),
+      transparent var(--g1-width),
+      transparent var(--g1-gap)
+    ),
+    /* angled secondary */
+      repeating-linear-gradient(
+        var(--grain-angle),
+        rgba(0, 0, 0, 0.25) 0,
+        rgba(0, 0, 0, 0.25) var(--g2-width),
+        transparent var(--g2-width),
+        transparent var(--g2-gap)
+      ),
+    /* vertical thin */
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.22) 0,
+        rgba(0, 0, 0, 0.22) var(--v1-width),
+        transparent var(--v1-width),
+        transparent var(--v1-gap)
+      ),
+    /* vertical secondary */
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.15) 0,
+        rgba(0, 0, 0, 0.15) var(--v2-width),
+        transparent var(--v2-width),
+        transparent var(--v2-gap)
+      );
+  mix-blend-mode: multiply;
+  opacity: var(--grain-opacity);
+}
+
+/* Knots (now stronger + visible) */
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: repeating-radial-gradient(
+      circle at 25% 35%,
+      transparent 0,
+      transparent calc(var(--knot-ring) - var(--knot-band)),
+      rgba(0, 0, 0, 0.5) var(--knot-ring),
+      transparent calc(var(--knot-ring) + var(--knot-band))
+    ),
+    repeating-radial-gradient(
+      circle at 70% 60%,
+      transparent 0,
+      transparent calc(var(--knot-ring) - var(--knot-band)),
+      rgba(0, 0, 0, 0.45) var(--knot-ring),
+      transparent calc(var(--knot-ring) + var(--knot-band))
+    ),
+    repeating-radial-gradient(
+      circle at 50% 20%,
+      transparent 0,
+      transparent calc(var(--knot-ring) - var(--knot-band)),
+      rgba(0, 0, 0, 0.55) var(--knot-ring),
+      transparent calc(var(--knot-ring) + var(--knot-band))
+    );
+
+  background-size: var(--knot-scale) var(--knot-scale),
+    calc(var(--knot-scale) * 1.1) calc(var(--knot-scale) * 1.1),
+    calc(var(--knot-scale) * 0.9) calc(var(--knot-scale) * 0.9);
+
+  background-position: 0 0, 20vw 15vh, -10vw 30vh;
+
+  mix-blend-mode: multiply;
+  opacity: var(--knot-opacity);
 }

@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   title: "Woodcraft Sounds",
   description: "Projects and releases by Micah Arvey.",
