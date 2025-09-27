@@ -161,24 +161,24 @@ export default function WoodgrainBG() {
     const onMove = (e: MouseEvent) => act(e.clientX, e.clientY);
     const onTouch = (e: TouchEvent) => {
       const t = e.touches[0];
-      if (t) grow(t.clientX, t.clientY);
+      if (t) act(t.clientX, t.clientY);
     };
 
     const onLeave = () => shrink();
 
     window.addEventListener("mousedown", onLeave, { passive: true });
-
-    window.addEventListener("mouseup", onLeave);
+    window.addEventListener("mouseup", onLeave, { passive: true });
     window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("touchstart", onTouch, { passive: true });
     window.addEventListener("touchmove", onTouch, { passive: true });
     // window.addEventListener("mouseleave", onLeave);
     // window.addEventListener("touchend", onLeave);
     return () => {
       window.removeEventListener("mousedown", onLeave);
-
       window.removeEventListener("mouseup", onLeave);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("touchstart", onTouch);
       // window.removeEventListener("mouseleave", onLeave);
       // window.removeEventListener("touchend", onLeave);
     };
