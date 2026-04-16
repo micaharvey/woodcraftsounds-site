@@ -38,6 +38,11 @@ export default function Home() {
             micaharvey.com
           </a>
         </p>
+        <p style={{ ...p, marginTop: "1rem" }}>
+          <a style={a} href="/tesselrun/privacypolicy">
+            Tessel Run Privacy Policy
+          </a>
+        </p>
         <p
           style={{
             ...p,
